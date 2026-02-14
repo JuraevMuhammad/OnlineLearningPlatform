@@ -43,7 +43,7 @@ public class AuthService : IAuthService
             FirstName = dto.FirstName,
             Email = dto.Email,
             PasswordHash = _hashed.HashPassword(dto.Password),
-            Role = UserRole.Student
+            Role = dto.Role
         };
 
         _context.Add(newUser);

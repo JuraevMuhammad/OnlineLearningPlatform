@@ -84,8 +84,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseAuthentication();   // ← ВАЖНО
-app.UseAuthorization();    // ← ВАЖНО
+app.UseAuthentication(); 
+app.UseAuthorization();   
 
 app.MapControllers();
 

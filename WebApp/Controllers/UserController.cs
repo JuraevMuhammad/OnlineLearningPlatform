@@ -10,6 +10,7 @@ namespace WebApp.Controllers;
 [Route("api/[controller]")]
 public class UserController(IUserService service) : ControllerBase
 {
+    [Authorize(Roles = "Student")]
     [HttpGet("all")]
     public IActionResult GetAllUsers(FilterUser filter)
     {
@@ -17,6 +18,7 @@ public class UserController(IUserService service) : ControllerBase
         return StatusCode(res.StatusCode, res);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpGet("{id}")]
     public IActionResult GetUserById(int id)
     {
@@ -32,6 +34,7 @@ public class UserController(IUserService service) : ControllerBase
         return StatusCode(res.StatusCode, res);
     }
 
+    [Authorize(Roles = "Student")]
     [HttpPut]
     public async Task<IActionResult> UpdateUser(int id, UpdateUser dto)
     {
@@ -39,6 +42,7 @@ public class UserController(IUserService service) : ControllerBase
         return StatusCode(res.StatusCode, res);
     }
 
+    [Authorize(Roles = "Admin")]
     [HttpDelete]
     public async Task<IActionResult> DeleteUser(int id)
     {
