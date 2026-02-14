@@ -117,7 +117,8 @@ public class UserService : IUserService
             if(_hashed.VerifyHashedPassword(dto.LastPassword, user.PasswordHash))
                 user.PasswordHash = _hashed.HashPassword(dto.NewPassword);
         
-        
+        await _context.SaveChangesAsync();
+        return new Response<string>(HttpStatusCode.Created, $"User {id} has been updated");
     }
 
     public Response<string> DeleteUser(int id)
