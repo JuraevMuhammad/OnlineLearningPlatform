@@ -10,5 +10,5 @@ public interface IUserService
     Response<GetUser> GetUser(int id);
     Task<Response<string>> CreatedUser(CreatedUser dto);
     Task<Response<string>> UpdateUser(int id, UpdateUser dto);
-    Response<string> DeleteUser(int id);
+    Task<Response<string>> DeleteUser(int id);
 }

@@ -100,6 +100,8 @@ public class UserService : IUserService
 
     #endregion
 
+    #region UpdateUser
+
     public async Task<Response<string>> UpdateUser(int id, UpdateUser dto)
     {
         var user = _context.Users.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
@@ -121,8 +123,19 @@ public class UserService : IUserService
         return new Response<string>(HttpStatusCode.Created, $"User {id} has been updated");
     }
 
-    public Response<string> DeleteUser(int id)
+    #endregion
+
+    #region DeleteUser
+
+    public async Task<Response<string>> DeleteUser(int id)
     {
-        throw new NotImplementedException();
+        var user = _context.Users.FirstOrDefault(x => x.Id == id && !x.IsDeleted);
+        if (user == null) return new Response<string>(HttpStatusCode.NotFound, "not found");
+
+        user.IsDeleted = true;
+        await _context.SaveChangesAsync();
+        return new Response<string>(HttpStatusCode.OK, "User has been deleted");
     }
+
+    #endregion
 }
