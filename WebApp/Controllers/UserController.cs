@@ -18,7 +18,7 @@ public class UserController(IUserService service) : ControllerBase
         return StatusCode(res.StatusCode, res);
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Student")]
     [HttpGet("{id}")]
     public IActionResult GetUserById(int id)
     {
