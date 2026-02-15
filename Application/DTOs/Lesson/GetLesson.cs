@@ -1,0 +1,10 @@
+﻿namespace Application.DTOs.Lesson;
+
+public class GetLesson
+{
+    public int Id { get; set; }
+    public int CourseId { get; set; }
+    public string Title { get; set; } = string.Empty;
+    public int Order { get; set; }
+    public DateTime? CreatedAt { get; set; }
+}
