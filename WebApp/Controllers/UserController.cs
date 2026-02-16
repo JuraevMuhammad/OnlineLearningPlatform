@@ -1,7 +1,9 @@
 ﻿using Application.DTOs.User;
 using Application.Filters;
 using Application.Interfaces;
+using Domain.Enum;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebApp.Controllers;
@@ -10,7 +12,7 @@ namespace WebApp.Controllers;
 [Route("api/[controller]")]
 public class UserController(IUserService service) : ControllerBase
 {
-    [Authorize(Roles = "Student")]
+    [Authorize(Roles = nameof(UserRole.Student) + "," + nameof(UserRole.Teacher))]
     [HttpGet("all")]
     public IActionResult GetAllUsers([FromQuery]FilterUser filter)
     {

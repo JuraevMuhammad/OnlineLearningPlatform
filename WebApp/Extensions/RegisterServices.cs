@@ -2,6 +2,7 @@
 using Infrastructure.Jwt;
 using Infrastructure.PasswordHash;
 using Infrastructure.Services;
+using WebApp.Controllers;
 
 namespace WebApp.Extensions;
 
@@ -16,5 +17,7 @@ public static class RegisterServices
         services.AddScoped<ICourseService, CourseService>();
         services.AddScoped<ILessonService, LessonService>();
         services.AddScoped<IExamService, ExamService>();
+        services.AddScoped<IQuestionService, QuestionService>();
+        services.AddScoped<IAnswerOptionService, AnswerOptionService>();
     }
 }
