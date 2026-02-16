@@ -19,5 +19,6 @@ public static class RegisterServices
         services.AddScoped<IExamService, ExamService>();
         services.AddScoped<IQuestionService, QuestionService>();
         services.AddScoped<IAnswerOptionService, AnswerOptionService>();
+        services.AddScoped<IExamResultService, ExamResultService>();
     }
 }
