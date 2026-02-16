@@ -167,6 +167,7 @@ public class CourseService : ICourseService
                 Id = x.Id,
                 CourseId = x.CourseId,
                 Title = x.Title,
+                Content = x.Content,
                 Order = x.Order,
                 CreatedAt = x.CreatedAt
             }).ToList()

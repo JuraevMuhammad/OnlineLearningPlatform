@@ -9,14 +9,14 @@ namespace WebApp.Controllers;
 public class AuthController(IAuthService service) : ControllerBase
 {
     [HttpPost("register")]
-    public async Task<IActionResult> Register(Register dto)
+    public async Task<IActionResult> Register([FromQuery] Register dto)
     {
         var res = await service.Register(dto);
         return StatusCode(res.StatusCode, res);
     }
 
     [HttpPost("login")]
-    public IActionResult Login(Login dto)
+    public IActionResult Login([FromQuery]Login dto)
     {
         var res = service.Login(dto);
         return StatusCode(res.StatusCode, res);
