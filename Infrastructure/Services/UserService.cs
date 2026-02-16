@@ -24,22 +24,19 @@ public class UserService : IUserService
 
     public PaginationResponse<List<GetUser>> GetUsers(FilterUser filter)
     {
-        var users = _context.Users.AsQueryable();
-        
-        if(!users.Any()) 
-            return new PaginationResponse<List<GetUser>>(HttpStatusCode.NotFound, "User not found");
+        var users = _context.Users.Where(x => !x.IsDeleted).AsQueryable();
         
         if(!string.IsNullOrEmpty(filter.FirstName))
             users = users.Where(u => u.FirstName.ToLower().Contains(filter.FirstName.ToLower()));
         
         if(filter.MaxAge!=null)
-            users = users.Where(u => u.Age <= filter.MaxAge);
+            users = users.Where(u => u.Age <= filter.MaxAge.Value);
         
         if(filter.MinAge != null)
-            users = users.Where(u => u.Age >= filter.MinAge);
+            users = users.Where(u => u.Age >= filter.MinAge.Value);
         
         var totalRecords = users.Count();
-        var res = users.Where(x => !x.IsDeleted)
+        var res = users
             .Skip((filter.PageNumber - 1) * filter.PageSize)
             .Take(filter.PageSize).ToList().Select(x => new GetUser()
                 {

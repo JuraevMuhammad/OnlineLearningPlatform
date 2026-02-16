@@ -46,7 +46,7 @@ public class AuthService : IAuthService
             Role = dto.Role
         };
 
-        _context.Add(newUser);
+        _context.Users.Add(newUser);
         var res = await _context.SaveChangesAsync();
         return res > 0
             ? new Response<string>(HttpStatusCode.OK, "created user")

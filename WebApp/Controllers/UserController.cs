@@ -12,7 +12,7 @@ public class UserController(IUserService service) : ControllerBase
 {
     [Authorize(Roles = "Student")]
     [HttpGet("all")]
-    public IActionResult GetAllUsers(FilterUser filter)
+    public IActionResult GetAllUsers([FromQuery]FilterUser filter)
     {
         var res = service.GetUsers(filter);
         return StatusCode(res.StatusCode, res);
