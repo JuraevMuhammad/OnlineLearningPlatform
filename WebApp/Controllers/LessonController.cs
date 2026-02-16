@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace WebApp.Controllers;
 
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 public class LessonController(ILessonService service) : ControllerBase
 {
     [HttpGet("filter")]

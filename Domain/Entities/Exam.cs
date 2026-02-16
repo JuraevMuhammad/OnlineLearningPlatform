@@ -7,7 +7,7 @@ public class Exam : BaseEntity
     public int CourseId { get; set; }
     [Required]
     public required string Title { get; set; }
-    public int MaxScore { get; set; }
+    public int MaxScore { get; set;}
     public DateTime? UpdateAt { get; set; }
     
     public Course? Course { get; set; }
