@@ -34,13 +34,37 @@ public class AnswerOptionService : IAnswerOptionService
 
     #endregion
 
-    public Task<Response<string>> UpdateAnswerOption(int id, UpdateAnswerOption dto)
+    #region UpdateAnswerOption
+
+    public async Task<Response<string>> UpdateAnswerOption(int id, UpdateAnswerOption dto)
     {
-        throw new NotImplementedException();
+        var res = _context.AnswerOptions.Find(id);
+        if (res == null)
+            return new Response<string>(HttpStatusCode.NotFound, "not found");
+        
+        res.QuestionId = dto.QuestionId ?? res.QuestionId;
+        res.Text = dto.Text ??  res.Text;
+        res.IsCorrect = dto.IsCorrect ?? res.IsCorrect;
+        res.UpdatedAt = DateTime.UtcNow;
+        
+        await _context.SaveChangesAsync();
+        return new Response<string>(HttpStatusCode.OK, "updated");
     }
 
-    public Task<Response<string>> DeleteAnswerOption(int id)
+    #endregion
+
+    #region DeleteAnswerOption
+
+    public async Task<Response<string>> DeleteAnswerOption(int id)
     {
-        throw new NotImplementedException();
+        var res = _context.AnswerOptions.Find(id);
+        if (res == null)
+            return new Response<string>(HttpStatusCode.NotFound, "not found");
+
+        res.IsDeleted = true;
+        await _context.SaveChangesAsync();
+        return new Response<string>(HttpStatusCode.OK, "deleted");
     }
+
+    #endregion
 }
