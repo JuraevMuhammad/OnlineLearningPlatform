@@ -14,21 +14,21 @@ public class UserController(IUserService service) : ControllerBase
 {
     [Authorize(Roles = nameof(UserRole.Student) + "," + nameof(UserRole.Teacher))]
     [HttpGet("all")]
-    public IActionResult GetAllUsers([FromQuery]FilterUser filter)
+    public async Task<IActionResult> GetAllUsers([FromQuery]FilterUser filter)
     {
-        var res = service.GetUsers(filter);
+        var res = await service.GetUsers(filter);
         return StatusCode(res.StatusCode, res);
     }
 
-    [Authorize(Roles = "Student")]
+    [Authorize(Roles = nameof(UserRole.Student) + "," + nameof(UserRole.Teacher))]
     [HttpGet("{id}")]
-    public IActionResult GetUserById(int id)
+    public async Task<IActionResult> GetUserById(int id)
     {
-        var res = service.GetUser(id);
+        var res = await service.GetUser(id);
         return StatusCode(res.StatusCode, res);
     }
 
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = nameof(UserRole.Admin) + "," + nameof(UserRole.Teacher))]
     [HttpPost("create")]
     public async Task<IActionResult> CreatedUser(CreatedUser dto)
     {
@@ -36,9 +36,9 @@ public class UserController(IUserService service) : ControllerBase
         return StatusCode(res.StatusCode, res);
     }
 
-    [Authorize(Roles = "Student")]
+    [Authorize(Roles = nameof(UserRole.Admin) + "," + nameof(UserRole.Teacher))]
     [HttpPut]
-    public async Task<IActionResult> UpdateUser(int id, UpdateUser dto)
+    public async Task<IActionResult> UpdateUser(int id,[FromQuery] UpdateUser dto)
     {
         var res = await service.UpdateUser(id, dto);
         return StatusCode(res.StatusCode, res);
