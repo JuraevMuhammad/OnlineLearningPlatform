@@ -25,6 +25,10 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 //AddScoped
 builder.Services.AddRegistrationServices();
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration["Redis:ConnectionString"];
+});
 
 //Authorize Jwt
 builder.Services.AddJwtRegister(builder.Configuration);

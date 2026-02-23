@@ -1,6 +1,7 @@
 ﻿using Application.Interfaces;
 using Infrastructure.Jwt;
 using Infrastructure.PasswordHash;
+using Infrastructure.Redis;
 using Infrastructure.Repositories.User;
 using Infrastructure.Services;
 using WebApp.Controllers;
@@ -22,5 +23,6 @@ public static class RegisterServices
         services.AddScoped<IAnswerOptionService, AnswerOptionService>();
         services.AddScoped<IExamResultService, ExamResultService>();
         services.AddScoped<IUserRepository, UserRepository>();
+        services.AddScoped<IRedisCache,  RedisCache>();
     }
 }
